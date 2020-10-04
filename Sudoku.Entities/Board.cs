@@ -83,8 +83,7 @@ namespace Sudoku.Entities
                 {
                     if (j % 3 == 0 && j > 0)
                         result = string.Concat(result, " ");
-                    //result = string.Concat(result, this[i, j].Value.HasValue ? this[i, j].Value.ToString() : "X", " ");
-                    result = string.Concat(result, this[i, j].Square, " ");
+                    result = string.Concat(result, this[i, j].Value.HasValue ? this[i, j].Value.ToString() : "X", " ");
                 }
                 result = string.Concat(result, "\n");
             }
