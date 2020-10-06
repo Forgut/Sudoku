@@ -26,14 +26,19 @@ namespace Sudoku.Logic.Solver
                 return ESearchResult.SudokuSolved;
             foreach (var eliminator in Eliminators)
                 eliminator.Eliminate();
-            FillTilesWithOnePossibility();
+            FillTilesWithOnePossibility(quitAfterFirstOne: true);
             return ESearchResult.FoundNumber;
         }
 
-        private void FillTilesWithOnePossibility()
+        private void FillTilesWithOnePossibility(bool quitAfterFirstOne = false)
         {
             foreach (var tile in _board.Tiles)
-                tile.SetValueIfOnlyOnePossible();
+                if (tile.SetValueIfOnlyOnePossible())
+                {
+                    _board.SetLastInsertedTile(tile);
+                    if (quitAfterFirstOne)
+                        return;
+                }
         }
     }
 }

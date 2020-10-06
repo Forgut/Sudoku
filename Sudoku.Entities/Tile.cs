@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
@@ -10,8 +11,10 @@ namespace Sudoku.Entities
         public int Y { get; }
         public int Square { get; }
         public int? Value { get; private set; }
+        [JsonIgnore]
         public bool HasValue => Value.HasValue;
         public List<int> Possibilites { get; private set; }
+        [JsonConstructor]
         Tile(int x, int y, int? value, List<int> possibilities)
         {
             Possibilites = possibilities;

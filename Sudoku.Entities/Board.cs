@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Sudoku.Entities
@@ -7,6 +9,12 @@ namespace Sudoku.Entities
     {
         public static int SIZE = 9;
         public IEnumerable<Tile> Tiles { get; set; }
+        [JsonIgnore]
+        public Tuple<int,int,int> LastInsertedTile { get; private set; }
+        [JsonConstructor]
+        Board(string[] args)
+        {
+        }
         public Board()
         {
             var tiles = new List<Tile>();
@@ -20,9 +28,30 @@ namespace Sudoku.Entities
             Tiles = tiles;
         }
 
-        public Board(Board oldBoard)
+        public Board(int?[,] input)
         {
-            Tiles = oldBoard.Tiles;
+            var tiles = new List<Tile>();
+            for (int i = 0; i < SIZE; i++)
+            {
+                for (int j = 0; j < SIZE; j++)
+                {
+                    if (input[i, j].HasValue)
+                        tiles.Add(new Tile(i, j, input[i, j].Value));
+                    else
+                        tiles.Add(new Tile(i, j));
+                }
+            }
+            Tiles = tiles;
+        }
+
+        public static Board GetBoardFromJson(string jsonSerializedBoard)
+        {
+            return JsonConvert.DeserializeObject<Board>(jsonSerializedBoard);
+        }
+
+        public string SaveToJson()
+        {
+            return JsonConvert.SerializeObject(this);
         }
 
         public Tile this[int i, int j]
@@ -37,6 +66,11 @@ namespace Sudoku.Entities
         public void ClearPosition(int x, int y)
         {
             this[x, y].ClearValue();
+        }
+
+        public void SetLastInsertedTile(Tile tile)
+        {
+            LastInsertedTile = new Tuple<int, int, int>(tile.X, tile.Y, tile.Value ?? 0);
         }
 
         public void AddPosibilityAtPosition(int possibility, int x, int y)
@@ -83,7 +117,7 @@ namespace Sudoku.Entities
                 {
                     if (j % 3 == 0 && j > 0)
                         result = string.Concat(result, " ");
-                    result = string.Concat(result, this[i, j].Value.HasValue ? this[i, j].Value.ToString() : "X", " ");
+                    result = string.Concat(result, this[i, j].Value.HasValue ? this[i, j].Value.ToString() : " ", LastInsertedTile?.Item1 == i && LastInsertedTile?.Item2 == j ? "!" : " ");
                 }
                 result = string.Concat(result, "\n");
             }
