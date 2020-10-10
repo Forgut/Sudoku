@@ -8,20 +8,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Sudoku.Frontend.Views
+namespace Sudoku.Frontend.Views.AISolvePages
 {
     /// <summary>
-    /// Interaction logic for Menu.xaml
+    /// Interaction logic for InsertSudokuPage.xaml
     /// </summary>
-    public partial class Menu : Window
+    public partial class InsertSudokuPage : Page
     {
-        public Menu()
+        public InsertSudokuPage()
         {
             InitializeComponent();
-            MainFrame.Content = new MenuPage();
         }
-
     }
 }
