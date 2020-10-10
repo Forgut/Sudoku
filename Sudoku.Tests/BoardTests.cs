@@ -9,7 +9,7 @@ namespace Sudoku.Tests
         [Test]
         public void BoardSetValueTest()
         {
-            var board = new Board();
+            var board = Board.GetEmptyBoard();
             Assert.AreEqual(null, board[3, 3].Value);
             board.SetValueAtPosition(9, 3, 3);
             Assert.AreEqual(9, board[3, 3].Value);
@@ -18,7 +18,7 @@ namespace Sudoku.Tests
         [Test]
         public void FullBoardTest()
         {
-            var board = new Board();
+            var board = Board.GetEmptyBoard();
             Assert.IsFalse(board.IsFull());
             for (int i = 0; i < Board.SIZE; i++)
                 for (int j = 0; j < Board.SIZE; j++)
@@ -28,7 +28,7 @@ namespace Sudoku.Tests
         [Test]
         public void NotFullBoardTest()
         {
-            var board = new Board();
+            var board = Board.GetEmptyBoard();
             Assert.IsFalse(board.IsFull());
             for (int i = 0; i < Board.SIZE; i++)
                 for (int j = 0; j < Board.SIZE; j++)

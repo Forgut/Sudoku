@@ -12,7 +12,7 @@ namespace Sudoku.Tests
         [Test]
         public void RowsAndColumnsEliminatorPossibilitiesTest()
         {
-            var board = new Board();
+            var board = Board.GetEmptyBoard();
             int insertedValue = 5;
             board.SetValueAtPosition(insertedValue, 4, 4);
             Assert.IsTrue(board[4, 3].Possibilites.Contains(insertedValue));
@@ -32,7 +32,7 @@ namespace Sudoku.Tests
         [Test]
         public void SquareEliminatorTest()
         {
-            var board = new Board();
+            var board = Board.GetEmptyBoard();
             int insertedValue = 5;
             board.SetValueAtPosition(insertedValue, 4, 4);
             Assert.IsTrue(board[4, 3].Possibilites.Contains(insertedValue));

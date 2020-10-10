@@ -7,25 +7,18 @@ namespace Sudoku.Entities
 {
     public class Board 
     {
+        [JsonIgnore]
         public static int SIZE = 9;
-        public IEnumerable<Tile> Tiles { get; set; }
+        [JsonIgnore]
+        private static int SUM_IN_ROW = 45;
+        public IEnumerable<Tile> Tiles { get; private set; }
         [JsonIgnore]
         public Tuple<int,int,int> LastInsertedTile { get; private set; }
+
         [JsonConstructor]
-        Board(string[] args)
-        {
-        }
         public Board()
         {
-            var tiles = new List<Tile>();
-            for (int i = 0; i < SIZE; i++)
-            {
-                for (int j = 0; j < SIZE; j++)
-                {
-                    tiles.Add(new Tile(i, j));  
-                }
-            }
-            Tiles = tiles;
+            
         }
 
         public Board(int?[,] input)
@@ -42,6 +35,21 @@ namespace Sudoku.Entities
                 }
             }
             Tiles = tiles;
+        }
+
+        public static Board GetEmptyBoard()
+        {
+            var board = new Board();
+            var tiles = new List<Tile>();
+            for (int i = 0; i < SIZE; i++)
+            {
+                for (int j = 0; j < SIZE; j++)
+                {
+                    tiles.Add(new Tile(i, j));
+                }
+            }
+            board.Tiles = tiles;
+            return board;
         }
 
         public static Board GetBoardFromJson(string jsonSerializedBoard)
@@ -93,6 +101,20 @@ namespace Sudoku.Entities
             return true;
         }
 
+        public bool IsCorrect()
+        {
+            if (!IsFull())
+                return false;
+            for (int index = 0; index < SIZE; index++)
+            {
+                if (GetTilesInColumn(index).Sum(x => x.Value) != SUM_IN_ROW)
+                    return false;
+                if (GetTilesInRow(index).Sum(x => x.Value) != SUM_IN_ROW)
+                    return false;   
+            }
+            return true;
+        }
+
         public IEnumerable<Tile> GetTilesInColumn(int index)
         {
             return Tiles.Where(t => t.Y == index);
@@ -122,6 +144,17 @@ namespace Sudoku.Entities
                 result = string.Concat(result, "\n");
             }
             return result;
+        }
+
+        public static bool AreEqual(Board board1, Board board2)
+        {
+            for (int i = 0; i < board1.Tiles.Count(); i++) 
+            {
+                if (board1.Tiles.ElementAt(i).Value != board2.Tiles.ElementAt(i).Value
+                    || board1.Tiles.ElementAt(i).Possibilites.Count != board2.Tiles.ElementAt(i).Possibilites.Count)
+                    return false;
+            }
+            return true;
         }
     }
 }

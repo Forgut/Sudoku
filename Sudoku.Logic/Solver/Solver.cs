@@ -3,6 +3,7 @@ using Sudoku.Enums;
 using Sudoku.Logic.EliminationMetods;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
 namespace Sudoku.Logic.Solver
@@ -26,7 +27,7 @@ namespace Sudoku.Logic.Solver
                 return ESearchResult.SudokuSolved;
             foreach (var eliminator in Eliminators)
                 eliminator.Eliminate();
-            FillTilesWithOnePossibility(quitAfterFirstOne: true);
+            FillTilesWithOnePossibility(quitAfterFirstOne: false);
             return ESearchResult.FoundNumber;
         }
 
