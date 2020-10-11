@@ -1,4 +1,5 @@
-﻿using Sudoku.Frontend.Views.AISolvePages;
+﻿using Sudoku.Entities;
+using Sudoku.Frontend.Views.AISolvePages;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -33,7 +34,23 @@ namespace Sudoku.Frontend.Views
         private void SolveByAIClick(object sender, RoutedEventArgs e)
         {
             var insertSudokuPage = new InsertSudokuPage();
-            NavigationService.Navigate(insertSudokuPage);
+            int?[,] boardArray = new int?[,]
+            {
+                { 5, null, null, null, 2, null, null, null, null },
+                { 8, 3, null, null, 4, 9, null, null, 7 },
+                { 6, null, null, 5, null, 1, 9, 8, null },
+
+                { null, 5, null, 4, null, 6, 8, 3, 2 },
+                { null, null, 4, null, 5, 3, null, null, null },
+                { null, null, 6, null, null, null, 7, null, 5 },
+
+                { null, null, 5, null, 6, null, 3, null, null },
+                { null, null, null, 1, null, null, null, 2, 9 },
+                { null, null, null, null, 7, 4, null, 6, null },
+            };
+            var board = new Board(boardArray);
+            var aiSolverPage = new AISolverPage(board);
+            NavigationService.Navigate(aiSolverPage);
         }
 
         private void ExitClick(object sender, RoutedEventArgs e)

@@ -22,7 +22,7 @@ namespace Sudoku.Cmd
 
                 { null, null, 5, null, 6, null, 3, null, null },
                 { null, null, null, 1, null, null, null, 2, 9 },
-                { null, null, null, null, 7, null, null, 6, null },
+                { null, null, null, null, 7, 4, null, 6, null },
             };
 
             //int?[,] boardArray = new int?[,]
@@ -41,7 +41,9 @@ namespace Sudoku.Cmd
             //};
             Board board = new Board(boardArray);
             Solver solver = new Solver(board);
-            while(true)
+            Console.WriteLine(board.ToString());
+            Console.ReadLine();
+            while (true)
             {
                 var result = solver.FindNextNumber();
                 Console.WriteLine(board.ToString());
