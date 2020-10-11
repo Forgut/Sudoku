@@ -1,24 +1,13 @@
 ﻿using Sudoku.Entities;
 using Sudoku.Frontend.ViewModels;
 using Sudoku.Logic.Solver;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Sudoku.Frontend.Views.AISolvePages
 {
-    /// <summary>
-    /// Interaction logic for AISolverPage.xaml
-    /// </summary>
     public partial class AISolverPage : Page
     {
         private BoardViewModel _boardViewModel;
@@ -39,6 +28,11 @@ namespace Sudoku.Frontend.Views.AISolvePages
             SetValues();
         }
 
+        private void ClearChildren()
+        {
+            SudokuGrid.Children.Clear();
+        }
+
         private void SetValues()
         {
             for (int i = 0; i < Board.SIZE; i++)
@@ -46,18 +40,15 @@ namespace Sudoku.Frontend.Views.AISolvePages
                 for (int j = 0; j < Board.SIZE; j++)
                 {
                     TextBlock textBlock = new TextBlock();
-                    Binding binding = new Binding("Value");
+                    Binding binding = new Binding(nameof(TileViewModel.Value));
                     binding.Source = _boardViewModel[i, j];
-                    textBlock.Name = $"Text{i}{j}";
                     textBlock.SetBinding(TextBlock.TextProperty, binding);
                     textBlock.HorizontalAlignment = HorizontalAlignment.Center;
                     textBlock.VerticalAlignment = VerticalAlignment.Center;
-                    this.SudokuGrid.Children.Add(textBlock);
+                    SudokuGrid.Children.Add(textBlock);
                     Grid.SetRow(textBlock, i);
                     Grid.SetColumn(textBlock, j);
                 }
-            //< TextBlock Text = "{Binding Tiles[0].Value}" Grid.Column = "0" Grid.Row = "0" HorizontalAlignment = "Center" VerticalAlignment = "Center" />
-
             }
         }
 
@@ -82,12 +73,10 @@ namespace Sudoku.Frontend.Views.AISolvePages
         private void NextStepClick(object sender, RoutedEventArgs e)
         {
             _solver.FindNextNumber();
-            _boardViewModel = new BoardViewModel(_board);
-            this.DataContext = _boardViewModel;
-            if (_board.IsFull())
-            {
-
-            }
+            //todo - find a way to do it properly by INotifyPropertyChanged
+            ClearChildren();
+            SetBorders();
+            SetValues();
         }
     }
 }

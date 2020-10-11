@@ -43,16 +43,6 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
-            <!--<TextBlock Text="{Binding Tiles[0].Value}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding Tiles[1].Value}" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding Tiles[2].Value}" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding Tiles[3].Value}" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding Tiles[4].Value}" Grid.Column="4" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding Tiles[5].Value}" Grid.Column="5" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding Tiles[6].Value}" Grid.Column="6" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding Tiles[7].Value}" Grid.Column="7" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding Tiles[8].Value}" Grid.Column="8" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
         </Grid>
         <Button Content="Next step" Grid.Column="0" Grid.Row="1" Click="NextStepClick"/>
     </Grid>
