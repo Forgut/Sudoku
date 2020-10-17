@@ -23,7 +23,6 @@ namespace Sudoku.Frontend.Views.AISolvePages
             _board = board;
             _solver = new Solver(_board);
             _boardViewModel = new BoardViewModel(_board);
-            this.DataContext = _boardViewModel;
             SetBorders();
             SetValues();
         }
@@ -40,11 +39,14 @@ namespace Sudoku.Frontend.Views.AISolvePages
                 for (int j = 0; j < Board.SIZE; j++)
                 {
                     TextBlock textBlock = new TextBlock();
+
                     Binding binding = new Binding(nameof(TileViewModel.Value));
                     binding.Source = _boardViewModel[i, j];
+
                     textBlock.SetBinding(TextBlock.TextProperty, binding);
                     textBlock.HorizontalAlignment = HorizontalAlignment.Center;
                     textBlock.VerticalAlignment = VerticalAlignment.Center;
+
                     SudokuGrid.Children.Add(textBlock);
                     Grid.SetRow(textBlock, i);
                     Grid.SetColumn(textBlock, j);
