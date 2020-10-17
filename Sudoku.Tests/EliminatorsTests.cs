@@ -51,7 +51,7 @@ namespace Sudoku.Tests
         }
 
         [Test]
-        public void RowsAndColumnsDoubleValueEliminatorTest()
+        public void RowsAndColumnsDoubleValueEliminatorColumnTest()
         {
             var board = Board.GetEmptyBoard();
             var tilesToRemovePossibility1 = board.Tiles
@@ -64,12 +64,44 @@ namespace Sudoku.Tests
             // 1 0 0
             // 1 0 0 
             // 0 0 0 
+            Assert.IsTrue(board[0, 0].Possibilites.Contains(1));
+            Assert.IsTrue(board[1, 0].Possibilites.Contains(1));
             Assert.IsTrue(board[4, 0].Possibilites.Contains(1));
             Assert.IsTrue(board[7, 0].Possibilites.Contains(1));
             var eliminator = new RowsAndColumnsDoublePossibilityEliminator(board);
             eliminator.Eliminate();
+            Assert.IsTrue(board[0, 0].Possibilites.Contains(1));
+            Assert.IsTrue(board[1, 0].Possibilites.Contains(1));
             Assert.IsFalse(board[4, 0].Possibilites.Contains(1));
             Assert.IsFalse(board[7, 0].Possibilites.Contains(1));
+            Assert.IsFalse(!board.Tiles.Where(x => x.X != 0).Any(x => x.Possibilites.Contains(1)));
+        }
+
+        [Test]
+        public void RowsAndColumnsDoubleValueEliminatorRowTest()
+        {
+            var board = Board.GetEmptyBoard();
+            var tilesToRemovePossibility1 = board.Tiles
+                 .Where(x => x.Square == 0)
+                 .Where(x => !(x.X == 0 && x.Y == 0))
+                 .Where(x => !(x.X == 0 && x.Y == 1));
+            foreach (var tile in tilesToRemovePossibility1)
+                tile.RemovePossibility(1);
+            //after this in first square possibility of 1 should look like this:
+            // 1 1 0
+            // 0 0 0 
+            // 0 0 0 
+            Assert.IsTrue(board[0, 0].Possibilites.Contains(1));
+            Assert.IsTrue(board[0, 1].Possibilites.Contains(1));
+            Assert.IsTrue(board[0, 4].Possibilites.Contains(1));
+            Assert.IsTrue(board[0, 7].Possibilites.Contains(1));
+            var eliminator = new RowsAndColumnsDoublePossibilityEliminator(board);
+            eliminator.Eliminate();
+            Assert.IsTrue(board[0, 0].Possibilites.Contains(1));
+            Assert.IsTrue(board[0, 1].Possibilites.Contains(1));
+            Assert.IsFalse(board[0, 4].Possibilites.Contains(1));
+            Assert.IsFalse(board[0, 7].Possibilites.Contains(1));
+            Assert.IsFalse(!board.Tiles.Where(x => x.Y != 0).Any(x => x.Possibilites.Contains(1)));
         }
     }
 }

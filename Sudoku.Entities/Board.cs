@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Sudoku.Entities
 {
-    public class Board 
+    public class Board
     {
         [JsonIgnore]
         public static int SIZE = 9;
@@ -13,12 +13,12 @@ namespace Sudoku.Entities
         private static int SUM_IN_ROW = 45;
         public IEnumerable<Tile> Tiles { get; private set; }
         [JsonIgnore]
-        public Tuple<int,int,int> LastInsertedTile { get; private set; }
+        public Tuple<int, int, int> LastInsertedTile { get; private set; }
 
         [JsonConstructor]
         public Board()
         {
-            
+
         }
 
         public Board(int?[,] input)
@@ -110,7 +110,7 @@ namespace Sudoku.Entities
                 if (GetTilesInColumn(index).Sum(x => x.Value) != SUM_IN_ROW)
                     return false;
                 if (GetTilesInRow(index).Sum(x => x.Value) != SUM_IN_ROW)
-                    return false;   
+                    return false;
             }
             return true;
         }
@@ -148,7 +148,7 @@ namespace Sudoku.Entities
 
         public static bool AreEqual(Board board1, Board board2)
         {
-            for (int i = 0; i < board1.Tiles.Count(); i++) 
+            for (int i = 0; i < board1.Tiles.Count(); i++)
             {
                 if (board1.Tiles.ElementAt(i).Value != board2.Tiles.ElementAt(i).Value
                     || board1.Tiles.ElementAt(i).Possibilites.Count != board2.Tiles.ElementAt(i).Possibilites.Count)

@@ -1,6 +1,6 @@
 ﻿using Sudoku.Entities;
 using System.Linq;
-using System.Runtime.CompilerServices;
+using Sudoku.Extensions;
 
 namespace Sudoku.Logic.EliminationMetods
 {
@@ -26,10 +26,12 @@ namespace Sudoku.Logic.EliminationMetods
                         var tile1 = tilesWithThisPossibilityInSquare.ElementAt(0);
                         var tile2 = tilesWithThisPossibilityInSquare.ElementAt(1);
                         if (tile1.X == tile2.X)
-                            foreach (var tile in _board.GetTilesInRow(tile1.X))
+                            foreach (var tile in _board.GetTilesInRow(tile1.X)
+                                .Except(tile1, tile2))
                                 ValueWasEliminated = tile.RemovePossibility(possibility);
                         if (tile1.Y == tile2.Y)
-                            foreach (var tile in _board.GetTilesInColumn(tile1.Y))
+                            foreach (var tile in _board.GetTilesInColumn(tile1.Y)
+                                .Except(tile1, tile2))
                                 ValueWasEliminated = tile.RemovePossibility(possibility);
                     }
                 }
