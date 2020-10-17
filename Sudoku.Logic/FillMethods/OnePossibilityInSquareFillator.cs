@@ -25,6 +25,8 @@ namespace Sudoku.Logic.FillMethods
                     {
                         fieldsWithOnlyOnePossibilityInSquare.First().SetValue(possibility);
                         ValueWasFilled = true;
+                        if (StopAfterFirstFound)
+                            return;
                     }
                 }
             }

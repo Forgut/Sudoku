@@ -8,6 +8,7 @@ namespace Sudoku.Logic.FillMethods
     public abstract class BaseFillator : IFillator
     {
         protected Board _board;
+        public bool StopAfterFirstFound { get; set; } = false;
 
         public BaseFillator(Board board)
         {

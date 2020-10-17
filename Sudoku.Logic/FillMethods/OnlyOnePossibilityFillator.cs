@@ -15,7 +15,12 @@ namespace Sudoku.Logic.FillMethods
         {
             foreach (var tile in _board.Tiles)
                 if (tile.SetValueIfOnlyOnePossible())
+                {
                     _board.SetLastInsertedTile(tile);
+                    ValueWasFilled = true;
+                    if (StopAfterFirstFound)
+                        return;
+                }
         }
     }
 }
