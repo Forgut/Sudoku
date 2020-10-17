@@ -20,7 +20,7 @@ namespace Sudoku.Logic.FillMethods
             {
                 foreach (var possibility in Tile.AllPossibilities)
                 {
-                    var fieldsWithOnlyOnePossibilityInSquare = square.Where(x => x.Possibilites.Any(y => y == possibility));
+                    var fieldsWithOnlyOnePossibilityInSquare = square.Where(x => x.Possibilites.Contains(possibility));
                     if (fieldsWithOnlyOnePossibilityInSquare.Count() == 1)
                     {
                         fieldsWithOnlyOnePossibilityInSquare.First().SetValue(possibility);

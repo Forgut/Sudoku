@@ -4,6 +4,7 @@ using Sudoku.Entities;
 using Sudoku.Logic.EliminationMetods;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Sudoku.Tests
 {
@@ -47,7 +48,28 @@ namespace Sudoku.Tests
             Assert.IsTrue(board[3, 3].Possibilites.Any());
             Assert.IsTrue(board[5, 5].Possibilites.Any());
             Assert.IsTrue(board[2, 2].Possibilites.Any());
+        }
 
+        [Test]
+        public void RowsAndColumnsDoubleValueEliminatorTest()
+        {
+            var board = Board.GetEmptyBoard();
+            var tilesToRemovePossibility1 = board.Tiles
+                 .Where(x => x.Square == 0)
+                 .Where(x => !(x.X == 0 && x.Y == 0))
+                 .Where(x => !(x.X == 1 && x.Y == 0));
+            foreach (var tile in tilesToRemovePossibility1)
+                tile.RemovePossibility(1);
+            //after this in first square possibility of 1 should look like this:
+            // 1 0 0
+            // 1 0 0 
+            // 0 0 0 
+            Assert.IsTrue(board[4, 0].Possibilites.Contains(1));
+            Assert.IsTrue(board[7, 0].Possibilites.Contains(1));
+            var eliminator = new RowsAndColumnsDoublePossibilityEliminator(board);
+            eliminator.Eliminate();
+            Assert.IsFalse(board[4, 0].Possibilites.Contains(1));
+            Assert.IsFalse(board[7, 0].Possibilites.Contains(1));
         }
     }
 }

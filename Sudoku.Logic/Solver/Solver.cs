@@ -21,6 +21,7 @@ namespace Sudoku.Logic.Solver
             {
                 new RowsAndColumnsEliminator(_board),
                 new SquareEliminator(_board),
+                new RowsAndColumnsDoublePossibilityEliminator(_board),
             };
             Fillators = new List<IFillator>()
             {
