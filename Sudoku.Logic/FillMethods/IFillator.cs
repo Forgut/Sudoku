@@ -8,5 +8,6 @@ namespace Sudoku.Logic.FillMethods
     {
         void Fill();
         bool ValueWasFilled { get; set; }
+        void ResetValueWasFilled();
     }
 }

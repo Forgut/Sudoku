@@ -30,5 +30,9 @@ namespace Sudoku.Logic.FillMethods
                     _valueWasFilled = value;
             }
         }
+        public void ResetValueWasFilled()
+        {
+            _valueWasFilled = false;
+        }
     }
 }

@@ -48,7 +48,7 @@ namespace Sudoku.Frontend.Views.AISolvePages
                     _selectedTextBlock.Background = Brushes.Transparent;
 
                 _selectedTextBlock = e.OriginalSource as TextBlock;
-                _selectedTextBlock.Background = Brushes.Cyan;
+                _selectedTextBlock.Background = Brushes.LightGray;
             }
             catch (Exception)
             {

@@ -10,6 +10,7 @@ namespace Sudoku.Frontend.GridBuilders
     public class GridBuilder
     {
         private Grid _grid;
+        public bool ShowPossibilities { get; set; } = true;
         public GridBuilder(Grid grid)
         {
             _grid = grid;
@@ -21,10 +22,22 @@ namespace Sudoku.Frontend.GridBuilders
             {
                 for (int j = 0; j < Board.SIZE; j++)
                 {
+                    double thicknessTop = 0.5;
+                    double thicknessBot = 0.5;
+                    double thicknessLeft = 0.5;
+                    double thicknessRight = 0.5;
+                    if (i % 3 == 2)
+                        thicknessBot = 2;
+                    if (i % 3 == 0)
+                        thicknessTop = 2;
+                    if (j % 3 == 2)
+                        thicknessRight = 2;
+                    if (j % 3 == 0)
+                        thicknessLeft = 2;
                     Border border = new Border()
                     {
                         BorderBrush = Brushes.Black,
-                        BorderThickness = new Thickness(1)
+                        BorderThickness = new Thickness(thicknessLeft, thicknessTop, thicknessRight, thicknessBot)
                     };
                     _grid.Children.Add(border);
                     Grid.SetRow(border, i);
@@ -54,7 +67,7 @@ namespace Sudoku.Frontend.GridBuilders
                         Grid.SetRow(textBlock, i);
                         Grid.SetColumn(textBlock, j);
                     }
-                    else
+                    else if (ShowPossibilities)
                     {
                         Grid innerGrid = new Grid();
                         innerGrid.ColumnDefinitions.Add(new ColumnDefinition());

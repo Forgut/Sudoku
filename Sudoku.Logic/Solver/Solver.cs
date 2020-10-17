@@ -41,6 +41,8 @@ namespace Sudoku.Logic.Solver
                 if (fillator.ValueWasFilled)
                     break;
             }
+            foreach (var fillator in Fillators)
+                fillator.ResetValueWasFilled();
             return ESearchResult.FoundNumber;
         }
     }
