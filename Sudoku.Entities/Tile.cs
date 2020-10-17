@@ -14,6 +14,8 @@ namespace Sudoku.Entities
         [JsonIgnore]
         public bool HasValue => Value.HasValue;
         public List<int> Possibilites { get; private set; }
+        public static IEnumerable<int> AllPossibilities = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
         [JsonConstructor]
         Tile(int x, int y, int? value, List<int> possibilities)
         {
@@ -29,7 +31,7 @@ namespace Sudoku.Entities
         public Tile(int x, int y, List<int> possibilities) : this(x, y, null, possibilities)
         {
         }
-        public Tile(int x, int y) : this(x, y, null, new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 })
+        public Tile(int x, int y) : this(x, y, null, AllPossibilities.ToList())
         {
 
         }
@@ -41,7 +43,7 @@ namespace Sudoku.Entities
         public void ClearValue()
         {
             Value = null;
-            Possibilites = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            Possibilites = AllPossibilities.ToList();
         }
         public bool SetValueIfOnlyOnePossible()
         {

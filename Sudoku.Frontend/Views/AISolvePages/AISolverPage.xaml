@@ -44,6 +44,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
         </Grid>
-        <Button Content="Next step" Grid.Column="0" Grid.Row="1" Click="NextStepClick"/>
+        <Button Content="Next step" Name="NextStepButton" Grid.Column="0" Grid.Row="1" Click="NextStepClick"/>
+        <Button Content="Back to menu" Name="BackToMenuButton" Grid.Column="2" Grid.Row="1" Click="BackToMenuButtonClick"/>
     </Grid>
 </Page>

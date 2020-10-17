@@ -1,6 +1,7 @@
 ﻿using Sudoku.Entities;
 using Sudoku.Enums;
 using Sudoku.Logic.EliminationMetods;
+using Sudoku.Logic.FillMethods;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
@@ -12,6 +13,7 @@ namespace Sudoku.Logic.Solver
     {
         private Board _board { get; set; }
         private IEnumerable<IEliminator> Eliminators;
+        private IEnumerable<IFillator> Fillators;
         public Solver(Board board)
         {
             _board = board;
@@ -20,6 +22,11 @@ namespace Sudoku.Logic.Solver
                 new RowsAndColumnsEliminator(_board),
                 new SquareEliminator(_board),
             };
+            Fillators = new List<IFillator>()
+            {
+                new OnlyOnePossibilityFillator(_board),
+                new OnePossibilityInSquareFillator(_board),
+            };
         }
         public ESearchResult FindNextNumber()
         {
@@ -27,19 +34,9 @@ namespace Sudoku.Logic.Solver
                 return ESearchResult.SudokuSolved;
             foreach (var eliminator in Eliminators)
                 eliminator.Eliminate();
-            FillTilesWithOnePossibility(quitAfterFirstOne: false);
+            foreach (var fillator in Fillators)
+                fillator.Fill();
             return ESearchResult.FoundNumber;
-        }
-
-        private void FillTilesWithOnePossibility(bool quitAfterFirstOne = false)
-        {
-            foreach (var tile in _board.Tiles)
-                if (tile.SetValueIfOnlyOnePossible())
-                {
-                    _board.SetLastInsertedTile(tile);
-                    if (quitAfterFirstOne)
-                        return;
-                }
         }
     }
 }

@@ -42,6 +42,18 @@ namespace Sudoku.Frontend.Views.AISolvePages
             ClearChildren();
             _gridBuilder.DrawBorders();
             _gridBuilder.DrawValues(_boardViewModel);
+            if (_board.IsCorrect())
+            {
+                MessageBox.Show("Sudoku solved!");
+                this.NextStepButton.IsEnabled = false;
+            }
+
+        }
+
+        private void BackToMenuButtonClick(object sender, RoutedEventArgs e)
+        {
+            var menuPage = new MenuPage();
+            NavigationService.Navigate(menuPage);
         }
     }
 }
