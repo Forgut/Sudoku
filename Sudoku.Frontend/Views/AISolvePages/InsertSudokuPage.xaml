@@ -5,23 +5,45 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Sudoku.Frontend.Views.AISolvePages"
       mc:Ignorable="d" 
+      FontSize="40"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="InsertSudokuPage">
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="6*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="400"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <TextBlock 
-            Text="Insert your sudoku, and press solve to make AI solve it."
-            FontSize="30"
-        />
+        <Grid Grid.Column="1" Grid.Row="1" Name="SudokuGrid" MouseLeftButtonDown="SudokuGridMouseLeftButtonDown" KeyDown="SudokuGridKeyDown" Focusable="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Button Content="Solve it!" Grid.Column="0" Grid.Row="1" Click="SolveItClick"/>
     </Grid>
 </Page>
