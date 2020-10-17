@@ -7,14 +7,14 @@ namespace Sudoku.Frontend.ViewModels
 {
     public class BoardViewModel
     {
-        public IEnumerable<TileViewModel> Tiles { get; set; }
+        private IEnumerable<TileViewModel> _tiles { get; set; }
         public BoardViewModel(Board board)
         {
-            Tiles = board.Tiles.Select(x => new TileViewModel(x));
+            _tiles = board.Tiles.Select(x => new TileViewModel(x));
         }
         public TileViewModel this[int i, int j]
         {
-            get => Tiles.FirstOrDefault(x => x.X == i && x.Y == j);
+            get => _tiles.FirstOrDefault(x => x.X == i && x.Y == j);
         }
     }
 }
