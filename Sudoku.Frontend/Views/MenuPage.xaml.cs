@@ -1,5 +1,6 @@
 ﻿using Sudoku.Entities;
 using Sudoku.Frontend.Views.AISolvePages;
+using Sudoku.Frontend.Views.UserSolvePages;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace Sudoku.Frontend.Views
 {
-    /// <summary>
-    /// Interaction logic for MenuPage.xaml
-    /// </summary>
     public partial class MenuPage : Page
     {
         public MenuPage()
@@ -28,7 +26,8 @@ namespace Sudoku.Frontend.Views
 
         private void SolveSudokuButtonClick(object sender, RoutedEventArgs e)
         {
-            ShowNotImplementedInfoBox();
+            var userChooseSudokuPage = new UserChooseSudokuPage();
+            NavigationService.Navigate(userChooseSudokuPage);
         }
 
         private void SolveByAIClick(object sender, RoutedEventArgs e)
@@ -40,11 +39,6 @@ namespace Sudoku.Frontend.Views
         private void ExitClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
-        }
-
-        private void ShowNotImplementedInfoBox()
-        {
-            MessageBox.Show($"This function is not implemented yet. Stay tuned.");
         }
     }
 }

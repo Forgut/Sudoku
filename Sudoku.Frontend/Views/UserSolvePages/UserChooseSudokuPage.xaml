@@ -1,0 +1,40 @@
+﻿<Page x:Class="Sudoku.Frontend.Views.UserSolvePages.UserChooseSudokuPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Sudoku.Frontend.Views.UserSolvePages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      FontSize="40"
+      Title="UserChooseSudokuPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Wybierz poziom trudności sudoku" TextAlignment="Center"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Button Name="EasyButton" Content="Łatwe" Grid.Row="1" Grid.Column="1" Margin="10" Click="EasyButtonClick"/>
+            <Button Name="MediumButton" Content="Średnie" Grid.Row="1" Grid.Column="2" Margin="10" Click="MediumButtonClick"/>
+            <Button Name="HardButton" Content="Trudne" Grid.Row="1" Grid.Column="3" Margin="10" Click="HardButtonClick"/>
+        </Grid>
+
+    </Grid>
+</Page>
