@@ -70,6 +70,7 @@ namespace Sudoku.Frontend.Views.AISolvePages
             {
                 _board[x, y].SetValue(value.Value);
                 _selectedTextBlock.Text = value.ToString();
+                _selectedTextBlock.TextAlignment = TextAlignment.Center;
             }
             else
             {
